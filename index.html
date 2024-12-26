@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Drawing Teacher</title>
+  <style>
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: linear-gradient(135deg, #74ebd5, #9face6);
+      color: #333;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-top: 20px;
+      color: #2c3e50;
+      text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      margin: 10px 0 20px;
+      color: #34495e;
+    }
+
+    .categories {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      justify-items: center;
+      width: 100%;
+    }
+
+    .options img {
+      width: 70px;
+      height: 70px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 5px;
+    }
+
+    .options img:hover {
+      transform: scale(1.2);
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+      border: 2px solid #34495e;
+    }
+
+    .canvas-container {
+      background-color: #fff;
+      border: 3px solid #2c3e50;
+      box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+      width: 600px;
+      height: 400px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 40px;
+      overflow: hidden;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .options {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .canvas-container {
+        width: 90%;
+        height: 300px;
+      }
+
+      .options img {
+        width: 60px;
+        height: 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Your Drawing Teacher</h1>
+  <h2>Choose your today's draw:</h2>
+
+  <div class="categories">
+    <div class="options">
+      <img src="images/dog.png" alt="Dog" onclick="selectObject('dog')" />
+      <img src="images/lion.png" alt="Lion" onclick="selectObject('lion')" />
+      <img src="images/fox.png" alt="Fox" onclick="selectObject('fox')" />
+      <img src="images/cow.png" alt="Cow" onclick="selectObject('cow')" />
+      <img src="images/fish.png" alt="Fish" onclick="selectObject('fish')" />
+      <img src="images/house.png" alt="House" onclick="selectObject('house')" />
+      <img src="images/rocket.png" alt="Rocket" onclick="selectObject('rocket')" />
+      <img src="images/pine.png" alt="Pineapple" onclick="selectObject('pineapple')" />
+      <img src="images/ice.png" alt="Ice Cream" onclick="selectObject('icecream')" />
+      <img src="images/tree.png" alt="Tree" onclick="selectObject('tree')" />
+    </div>
+  </div>
+
+  <!-- Video Container -->
+  <div id="drawCanvas" class="canvas-container">
+    <p style="color: #888; font-size: 1.2rem;">Select an item to start drawing!</p>
+  </div>
+
+  <script>
+    const canvasContainer = document.getElementById('drawCanvas');
+
+    function selectObject(object) {
+      // Clear the canvas for a new video
+      clearCanvas();
+      const videoUrls = {
+        dog: "https://www.youtube.com/embed/s9zVqTrBc4Q",
+        house: "https://www.youtube.com/embed/aAsXj114Zm4",
+        tree: "https://www.youtube.com/embed/ILKJbcpGpNo",
+        fox: "https://www.youtube.com/embed/vRrzgqp0S2U",
+        cow: "https://www.youtube.com/embed/koSxTdoYpnY",
+        fish: "https://www.youtube.com/embed/OZJ-_nD6iiw",
+        pineapple: "https://www.youtube.com/embed/uYBY9wnBnlw",
+        icecream: "https://www.youtube.com/embed/YBrbm4_O7Js",
+        rocket: "https://www.youtube.com/embed/0mpsLS2_F2M",
+        lion: "https://www.youtube.com/embed/E1MKka9KZfc"
+      };
+
+      // Get the video URL for the selected object
+      const videoUrl = videoUrls[object];
+      if (videoUrl) {
+        showVideo(videoUrl);
+      }
+    }
+
+    function showVideo(url) {
+      
+      const iframe = document.createElement('iframe');
+      iframe.src = url;
+      iframe.allowFullscreen = true;
+
+      
+      canvasContainer.innerHTML = '';
+      canvasContainer.appendChild(iframe);
+    }
+
+    function clearCanvas() {
+      
+      canvasContainer.innerHTML = '<p style="color: #888; font-size: 1.2rem;">Select an item to start drawing!</p>';
+    }
+  </script>
+
+</body>
+</html>
